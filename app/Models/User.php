@@ -69,12 +69,12 @@ class User extends Authenticatable
         return $this->statuses()->orderBy('created_at', 'desc');
     }
 
-    // 关注者
+    // 粉丝列表：假设当前用户是 id = 1；  user_id = 1，的follower_id 列表就是粉丝列表
     public function followers () {
         return $this->belongsToMany(User::Class, 'followers', 'user_id', 'follower_id');
     }
 
-    // 正在关注的
+    // 关注列表：假设当前用户是 id = 1；  follower_id = 1，的user_id 列表就是关注列表
     public function followings () {
         return $this->belongsToMany(User::Class, 'followers', 'follower_id', 'user_id');
     }
