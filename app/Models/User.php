@@ -69,16 +69,18 @@ class User extends Authenticatable
         return $this->statuses()->orderBy('created_at', 'desc');
     }
 
+    // 关注者
     public function followers () {
         return $this->belongsToMany(User::Class, 'followers', 'user_id', 'follower_id');
     }
 
+    // 正在关注的
     public function followings () {
         return $this->belongsToMany(User::Class, 'followers', 'follower_id', 'user_id');
     }
 
     public function follow ($user_ids) {
-        if (!is_array($user_id)) {
+        if (!is_array($user_ids)) {
             $user_ids = compact('user_ids');
         }
         $this->followings()->sync($user_ids, false);
